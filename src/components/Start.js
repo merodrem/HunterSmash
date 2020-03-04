@@ -14,6 +14,7 @@ export default class StartComponent extends Component {
     constructor(props) {
         super(props)
     }
+
     render() {
         return (
             <View style={styles.clearScreen}>
@@ -24,17 +25,18 @@ export default class StartComponent extends Component {
                         <Image style={styles.startIcon} resizeMode="contain" source={IMAGES.playIcon} />
                         <Text style={[styles.startText, { color: 'white' }]}>{translate('startGame')}</Text>
                     </TouchableOpacity>
+                    <View>
                     <TouchableOpacity style={styles.startButton}
                         onPress={this.props.onRules}>
                         <Image style={styles.startIcon} resizeMode="contain" source={IMAGES.instructionsIcon} />
                         <Text style={styles.startText}>{translate('instructions')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => Linking.openURL("https://ko-fi.com/nomadicdev").catch(err => console.log('An error occurred', err))}
                         style={[styles.startButton, { backgroundColor: 'tomato', borderColor: 'white' }]}>
                         <Image style={styles.startIcon} resizeMode="contain" source={IMAGES.supportIcon} />
                         <Text style={[styles.startText, { color: 'white' }]}>{translate('support')}</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                         style={styles.startButton}
                         onPress={() => Linking.openURL("https://github.com/merodrem/HunterSmash").catch(err => console.log('An error occurred', err))}
@@ -46,6 +48,7 @@ export default class StartComponent extends Component {
                         onPress={this.props.onCredits}>
                         <Text style={styles.startText}>{translate('credits')}</Text>
                     </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         );

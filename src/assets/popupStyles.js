@@ -111,7 +111,7 @@ export default styles = StyleSheet.create({
         borderWidth: 5,
         borderRadius: 10,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         width: Constants.MAX_WIDTH*0.8,
         height: Constants.MAX_HEIGHT*0.6,
         marginTop: Constants.YR * -40
