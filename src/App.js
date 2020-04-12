@@ -59,7 +59,7 @@ export default class App extends Component {
     AsyncStorage.getItem('@maxScore')
       .then(maxScore => this.setState({ ...DEFAULT_STATE, maxScore: JSON.parse(maxScore) }))
       .catch(error => {
-        console.log(error)
+        // console.log(error)
         this.setState(DEFAULT_STATE);
       })
     RNLocalize.addEventListener("change", this.handleLocalizationChange);

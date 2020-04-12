@@ -20,4 +20,6 @@ export default IMAGES = Object.freeze({
     supportIcon: require('./img/icon_support.png'),
     instructionsIcon: require('./img/icon_instructions.png'),
     githubIcon: require('./img/icon_github.png'),
+    yesIcon: require('./img/icon_yes.png'),
+    noIcon: require('./img/icon_no.png'),
 });

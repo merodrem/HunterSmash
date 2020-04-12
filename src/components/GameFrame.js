@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
-  Text
+  Text,
+  BackHandler
 } from 'react-native';
 import * as RNLocalize from "react-native-localize";
 import AsyncStorage from '@react-native-community/async-storage';
@@ -19,6 +20,7 @@ import StartComponent from './Start';
 import { setI18nConfig, translate } from '../services/translationService';
 import CreditsComponent from './Credits';
 import RulesComponent from './Rules';
+import LeaveComponent from './Leave';
 
 const DEFAULT_TIME = 20;
 const DEFAULT_STATE = {
@@ -26,6 +28,7 @@ const DEFAULT_STATE = {
   score: 0,
   time: DEFAULT_TIME,
   cleared: false,
+  leave: false,
   paused: false,
   gameover: false,
   start: true,
@@ -55,6 +58,18 @@ export default class GameFrameComponent extends Component {
     this.lastCellPopped = null;
   }
 
+  backAction = () => {
+    if(this.state.start){
+      BackHandler.exitApp()
+    }
+    else{
+      if (this.interval) clearInterval(this.interval);
+      if (this.timeInterval) clearInterval(this.timeInterval);
+      this.setState({leave:true})
+      return true;
+    }
+  };
+
   componentDidMount = () => {
     AsyncStorage.getItem('@maxScore')
       .then(maxScore => this.setState({ ...DEFAULT_STATE, maxScore: JSON.parse(maxScore) }))
@@ -63,9 +78,14 @@ export default class GameFrameComponent extends Component {
         this.setState(DEFAULT_STATE);
       })
     RNLocalize.addEventListener("change", this.handleLocalizationChange);
+    this.backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.backAction
+    );
   }
 
   componentWillUnmount() {
+    this.backHandler.remove();
     RNLocalize.removeEventListener("change", this.handleLocalizationChange);
   }
 
@@ -191,6 +211,7 @@ export default class GameFrameComponent extends Component {
     this.setState({
       paused: false,
       start: false,
+      leave: false
     }, this._setupTicks);
   }
 
@@ -304,6 +325,7 @@ export default class GameFrameComponent extends Component {
         {this.state.credits && <CreditsComponent onBack={() => this.setState({ credits: false })} />}
         {this.state.gameover && <GameOverComponent onReset={this._reset} level={this.state.level} score={this.state.score} />}
         {this.state.paused && <PauseComponent onReset={this._reset} onResume={this._resume} />}
+        {this.state.leave && <LeaveComponent onResume={this._resume} onLeave={this._reset} />}
       </View>
     )
   }

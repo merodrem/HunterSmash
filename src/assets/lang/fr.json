@@ -6,6 +6,8 @@
     "restart": "retour au menu",
     "next": "niveau suivant",
     "cleared": "niveau complété",
+    "ready": "prêt?",
+    "leave": "quitter la partie?",
     "support": "soutenir le développeur",
     "code": "code source",
     "credits": "crédits",
