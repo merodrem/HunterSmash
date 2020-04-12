@@ -6,6 +6,7 @@ import {
   Image
 } from 'react-native';
 import styles from '../assets/popupStyles';
+import { translate } from '../services/translationService';
 
 export default class PauseComponent extends Component {
     render() {
@@ -14,7 +15,7 @@ export default class PauseComponent extends Component {
 
 
                 <View style={styles.panel}>
-                    <Text style={styles.panelTitle}>Ready?</Text>
+                    <Text style={styles.panelTitle}>{translate("ready")}</Text>
 
                     <View style={styles.panelButtonsContainer}>
                         <TouchableOpacity onPress={this.props.onReset}>
